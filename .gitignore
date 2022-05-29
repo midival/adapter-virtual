@@ -1,0 +1,11 @@
+node_modules/
+dist/
+yarn-error.log
+.cache/
+coverage/
+.DS_Store
+docs/
+
+# stryker temp files
+.stryker-tmp
+reports/
