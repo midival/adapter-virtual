@@ -1,5 +1,5 @@
 import { MIDIValOutput } from "@midival/core";
-import { MIDIValVirtualDevice } from "./MidivalVirtualDevice";
+import { MIDIValVirtualDevice } from "./MidiValVirtualDevice";
 import { MIDIValVirtualThru } from "./MIDIValVirtualThru";
 
 describe("MIDIValVirtualThru", () => {

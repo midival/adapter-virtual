@@ -1,7 +1,7 @@
 import { Omnibus } from "@hypersphere/omnibus";
 import { IMIDIAccess, IMIDIInput, IMIDIOutput, UnregisterCallback } from "@midival/core";
 import { InputStateChangeCallback, OutputStateChangeCallback } from "@midival/core/dist/wrappers/access/IMIDIAccess";
-import { MIDIValVirtualDevice } from "./MidivalVirtualDevice";
+import { MIDIValVirtualDevice } from "./MidiValVirtualDevice";
 
 interface Events {
     "on_input_connect": [IMIDIInput],
@@ -10,7 +10,7 @@ interface Events {
     "on_output_disconnect": [IMIDIOutput],
 }
 
-export class MIDIvalVirtualAdapter implements IMIDIAccess {
+export class MIDIValVirtualAdapter implements IMIDIAccess {
     private _inputs: IMIDIInput[] = [];
     private _outputs: IMIDIOutput[] = [];
 

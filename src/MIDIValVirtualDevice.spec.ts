@@ -1,5 +1,5 @@
 import { MIDIValInput, MIDIValOutput } from "@midival/core";
-import { MIDIValVirtualDevice } from "./MidivalVirtualDevice";
+import { MIDIValVirtualDevice } from "./MidiValVirtualDevice";
 
 describe("MIDIValVirtualDevice", () => {
     it("should properly instantiate virtual device and send note on", () => {
