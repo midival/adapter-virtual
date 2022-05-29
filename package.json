@@ -7,6 +7,7 @@
   "devDependencies": {
     "@stryker-mutator/core": "^6.0.2",
     "@stryker-mutator/jest-runner": "^6.0.2",
+    "@stryker-mutator/typescript-checker": "^6.0.2",
     "@types/jest": "^27.4.1",
     "@types/webmidi": "^2.0.6",
     "gh-pages": "^3.2.3",
@@ -25,9 +26,7 @@
     "deploy": "gh-pages -d docs"
   },
   "dependencies": {
-    "@hypersphere/omnibus": "^0.0.6",
-    "@midival/core": "^0.0.16",
-    "@stryker-mutator/typescript-checker": "^6.0.2"
+    "@hypersphere/omnibus": "^0.0.6"
   },
   "peerDependencies": {
     "@midival/core": "^0.0.16"
