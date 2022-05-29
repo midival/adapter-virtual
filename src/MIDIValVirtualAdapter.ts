@@ -10,16 +10,12 @@ interface Events {
     "on_output_disconnect": [IMIDIOutput],
 }
 
-export class MidivalVirtualAdapter implements IMIDIAccess {
+export class MIDIvalVirtualAdapter implements IMIDIAccess {
     private _inputs: IMIDIInput[] = [];
     private _outputs: IMIDIOutput[] = [];
-    private _manufacturer: string;
 
     private _bus: Omnibus<Events> = new Omnibus();
 
-    constructor(manufacturer: string = "MIDIVal Virtual") {
-        this._manufacturer = manufacturer;
-    }
     onInputConnected(callback: InputStateChangeCallback): UnregisterCallback {
         return this._bus.on("on_input_connect", callback);
     }
@@ -34,23 +30,39 @@ export class MidivalVirtualAdapter implements IMIDIAccess {
     }
     
     addDevice(virtualDevice: MIDIValVirtualDevice): void {
-        this._inputs.push(virtualDevice);
-        this._outputs.push(virtualDevice);
-        this._bus.trigger("on_input_connect", virtualDevice);
-        this._bus.trigger("on_output_connect", virtualDevice);
+        this.addInput(virtualDevice);
+        this.addOutput(virtualDevice);
+    }
+
+    addInput(midiIn: IMIDIInput): void {
+        this._inputs.push(midiIn);
+        this._bus.trigger("on_input_connect", midiIn);
+    }
+
+    addOutput(midiOut: IMIDIOutput): void {
+        this._outputs.push(midiOut);
+        this._bus.trigger("on_output_connect", midiOut);
+    }
+
+    removeInputDevice(midiIn: IMIDIInput): void {
+        this._inputs = this._inputs.filter(function(inp) {
+            return inp === midiIn;
+        });
+        this._bus.trigger("on_input_disconnect", midiIn);
+    }
+
+    removeOutputDevice(midiOut: IMIDIOutput): void {
+        this._outputs = this._outputs.filter(function(out) {
+            return out === midiOut;
+        });
+        this._bus.trigger("on_output_disconnect", midiOut);
     }
 
     disconnectDevice(virtualDevice: MIDIValVirtualDevice): void {
-        this._inputs = this._inputs.filter(function(inp) {
-            return inp === virtualDevice;
-        });
-        this._bus.trigger("on_input_disconnect", virtualDevice);
-
-        this._outputs = this._outputs.filter(function(out) {
-            return out === virtualDevice;
-        });
-        this._bus.trigger("on_output_disconnect", virtualDevice);
+        this.removeInputDevice(virtualDevice);
+        this.removeOutputDevice(virtualDevice);
     }
+
     connect(): Promise<void> {
         return Promise.resolve();
     }
